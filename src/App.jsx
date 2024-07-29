@@ -1,16 +1,20 @@
 import { useState } from "react";
+import { nanoid } from "nanoid";
 
 function App() {
-  const [counter,setCounter]=useState(handleClick)
+  const [counter,setCounter]=useState(handleClick())
 
   function handleClick(){
     let dice=[]
     for(let i=0;i<10;i++){
-      dice.push(Math.ceil(Math.random()*6))
+      dice.push({value:Math.ceil(Math.random()*6),isHeld:false,id:nanoid()})
     }
     return dice
   }
-let num=counter.map(dice=><button className="px-6 py-4 rounded-md text-xl font-medium bg-white mx-2 shadow-sm my-2">{dice}</button>)
+  function newDice(){
+    setCounter(handleClick())
+  }
+let num=counter.map(dice=><button className="px-6 py-4 rounded-md text-xl font-medium bg-white mx-2 shadow-sm my-2" value={dice.value} key={dice.id}/>)
 
   return (
     <div className="grid h-screen w-screen">
@@ -24,7 +28,7 @@ let num=counter.map(dice=><button className="px-6 py-4 rounded-md text-xl font-m
             {num}
           </div>
           <div className="mt-10 ">
-          <button className="bg-blue-600 px-8 py-2 text-white rounded-sm ml-52" onClick={handleClick}>Roll</button>
+          <button className="bg-blue-600 px-8 py-2 text-white rounded-sm ml-52" onClick={newDice}>Roll</button>
           </div>
         </div>
       </div>
