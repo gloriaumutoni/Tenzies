@@ -1,20 +1,16 @@
 import { useState } from "react";
 
 function App() {
-  const [counter,setCounter]=useState([])
-  const [fixedNum,setFixedNum]=useState(counter)
+  const [counter,setCounter]=useState(handleClick)
 
   function handleClick(){
     let dice=[]
     for(let i=0;i<10;i++){
       dice.push(Math.ceil(Math.random()*6))
     }
-    setCounter(dice)
+    return dice
   }
-
- function setColor(){
-
- }
+let num=counter.map(dice=><button className="px-6 py-4 rounded-md text-xl font-medium bg-white mx-2 shadow-sm my-2">{dice}</button>)
 
   return (
     <div className="grid h-screen w-screen">
@@ -24,22 +20,8 @@ function App() {
             <h2 className="mt-4 font-bold text-2xl">Tenzies</h2>
             <p className="ml-28 w-[56%]">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
           </div>
-          <div className="ml-8 grid grid-rows-2">
-            <div className="flex gap-10">
-              <button className="px-6 py-4 rounded-md text-xl font-medium bg-white shadow-sm my-2">{counter[0]}</button>
-              <button className="px-6 py-4 rounded-md text-xl font-medium bg-white shadow-sm my-2">{counter[1]}</button>
-              <button className="px-6 py-4 rounded-md text-xl font-medium bg-white shadow-sm my-2">{counter[2]}</button>
-              <button className="px-6 py-4 rounded-md text-xl font-medium bg-white shadow-sm my-2">{counter[3]}</button>
-              <button className="px-6 py-4 rounded-md text-xl font-medium bg-white shadow-sm my-2">{counter[4]}</button>
-            </div>
-
-            <div className="flex gap-10">
-              <button className="px-6 py-4 rounded-md text-xl font-medium bg-white shadow-sm my-2">{counter[5]}</button>
-              <button className="px-6 py-4 rounded-md text-xl font-medium bg-white shadow-sm my-2">{counter[6]}</button>
-              <button className="px-6 py-4 rounded-md text-xl font-medium bg-white shadow-sm my-2">{counter[7]}</button>
-              <button className="px-6 py-4 rounded-md text-xl font-medium bg-white shadow-sm my-2">{counter[8]}</button>
-              <button className="px-6 py-4 rounded-md text-xl font-medium bg-white shadow-sm my-2">{counter[9]}</button>
-            </div>
+          <div className=" grid grid-cols-5 ">
+            {num}
           </div>
           <div className="mt-10 ">
           <button className="bg-blue-600 px-8 py-2 text-white rounded-sm ml-52" onClick={handleClick}>Roll</button>
