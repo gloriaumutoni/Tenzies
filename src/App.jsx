@@ -5,19 +5,23 @@ import Dice from "./Dice";
 function App() {
   const [counter, setCounter] = useState(handleClick());
 
+  function generateDie() {
+    return {
+      value: Math.ceil(Math.random() * 6),
+      isHeld: false,
+      id: nanoid(),
+    };
+  }
+
   function handleClick() {
     let dice = [];
     for (let i = 0; i < 10; i++) {
-      dice.push({
-        value: Math.ceil(Math.random() * 6),
-        isHeld: false,
-        id: nanoid(),
-      });
+      dice.push(generateDie());
     }
     return dice;
   }
   function newDice() {
-    setCounter(handleClick());
+    setCounter((prev) => prev.map((die) => (die.isHeld ? die : generateDie())));
   }
   function holdDice(id) {
     setCounter((prev) =>
